@@ -1,5 +1,5 @@
 {_, $, Backbone, Marionette } = require( '../common.coffee' )
-{ OverlayView } = require( './index.coffee' )
+{ OverlayView } = require( './OverlayView.coffee' )
 
 class module.exports.MenuView extends Marionette.LayoutView
 	className: 'menu-view'

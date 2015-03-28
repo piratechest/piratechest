@@ -20,6 +20,10 @@ class Magnet extends Backbone.Model
 		@set( 'title', torrent.name )
 		@set( 'peers', torrent.swarm.numPeers )
 		@set( 'status', true )
+		# FIXME: Destroying this torrent as soon as we have metadata
+		# this may not be the best way to prevent downloading
+		# when all we want is the metadata (by default at least)
+		@torrent.destroy()
 
 class MagnetCollection extends Backbone.Collection
 	initialize: (models, {@torrentClient, @gm}) ->

@@ -1,18 +1,19 @@
-fs = require('fs')
+fs = require 'fs'
+WebTorrent = require 'webtorrent'
+gm = require './lib/gossip.js'
 
-{_, $, Backbone, Marionette } = require( './common.coffee' )
-{ AppView, LoadingView } = require( './views/index.coffee' )
+{_, $, Backbone, Marionette, nw, win } = require './common.coffee'
+{ AppView } = require './views/AppView.coffee'
+{ LoadingView } = require './views/LoadingView.coffee'
 { IntroView } = require './views/IntroView.coffee'
 { ContentsView } = require './views/ContentsView.coffee'
-{ MagnetCollection, Magnet } = require( './models/models.coffee' )
 
-{ nw, win } = window.nwin
+{ MagnetCollection, Magnet } = require './models/models.coffee'
+
 nativeMenuBar = new nw.Menu( type: "menubar" )
 nativeMenuBar.createMacBuiltin("Pirate Chest") if process.platform is 'darwin'
 win.menu = nativeMenuBar;
 
-gm = require( './lib/gossip.js')
-WebTorrent = require 'webtorrent'
 client = new WebTorrent()
 
 magnetCollection = new MagnetCollection( [], torrentClient: client, gm: gm )
