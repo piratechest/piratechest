@@ -1,4 +1,4 @@
-{_, $, Backbone, Marionette } = require( '../common.coffee' )
+{_, $, Backbone, Marionette, localStorage } = require( '../common.coffee' )
 { OverlayView } = require( './OverlayView.coffee' )
 
 class module.exports.IntroView extends OverlayView
@@ -18,8 +18,12 @@ class module.exports.IntroView extends OverlayView
 		'click button': 'handleClickOpen'
 
 	handleClickOpen: ->
-		@trigger('close')
+		@trigger( 'open' )
+		@destroy()
 
 	handleClickOverlay: (ev) ->
 		ev.preventDefault()
 		false
+
+	onShow: =>
+		localStorage.introShown = true

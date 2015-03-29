@@ -3,21 +3,22 @@
   "version": "0.0.1",
   "description": "Peer to peer magnet discovery",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/d11e9/piratechest.git"
+    "type": "git",
+    "url": "https://github.com/d11e9/piratechest.git"
   },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "app": "nodewebkit ./app",
     "build": "grunt",
-    "server": "node ./app/src/lib/gossip.js 9001"
+    "server": "node ./app/src/lib/lodestone/index.js 9001"
   },
   "author": "d11e9",
   "license": "NONE YET",
   "dependencies": {
     "grunt": "^0.4.5",
     "grunt-node-webkit-builder": "^1.0.2",
-    "nodewebkit": "^0.11.6"
+    "nodewebkit": "^0.11.6",
+    "parse-torrent": "~4.0.0"
   }
 }

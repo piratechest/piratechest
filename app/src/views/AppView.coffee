@@ -25,23 +25,31 @@ class module.exports.AppView extends Marionette.LayoutView
         body: '.body-region'
         overlay: '.overlay'
 
-    initialize: ({@collection}) ->
-        @menuView = new MenuView()
-        @listenTo @menuView, 'show:menuItem', @handleShowMenuItem
+    initialize: ({@collection, config, @torrentClient}) ->
+        @defaultItem = config?.defaultView
+        @menuView = new MenuView( { @defaultItem } )
+        @bodyView = new BodyView( collection: @collection )
+        @searchView = new LodestoneView( collection: @collection, torrentClient: @torrentClient )
+        @cardsView = new CardsView()
+        @settingsView = new SettingsView()
 
     onShow: ->
         @header.show( new TitlebarView() )
         @menu.show( @menuView )
-        @handleShowMenuItem( 'collection' )
+        @listenTo @menuView, 'show:menuItem', @handleShowMenuItem
+        @handleShowMenuItem( @defaultItem or 'collection' )
 
     handleShowMenuItem: (item) ->
-        switch item
-            when 'collection' then @body.show( new BodyView( collection: @collection ) )
-            when 'search' then @body.show( new LodestoneView() )
-            when 'cards' then @body.show( new CardsView() )
-            when 'settings' then @body.show( new SettingsView() )
-            else @body.empty()
+        view = switch item
+            when 'collection' then @bodyView
+            when 'search' then @searchView
+            when 'cards' then @cardsView
+            when 'settings' then @settingsView
+
+        @listenTo view, 'show:overlay', @showOverlay
+        console.log "AppView: showing #{ item } view.", view    
+        @body.show( view, preventDestroy: true )
 
     showOverlay: (view) ->
-        view.on 'close', => @overlay.empty()
+        console.log "Showing overlay: ", view
         @overlay.show( view )

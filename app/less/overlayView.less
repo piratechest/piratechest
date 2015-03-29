@@ -4,7 +4,7 @@
 .overlay-view {
     
     .overlay {
-        background-color: rgba( 0,0,0, 0.2 );
+        background-color: rgba(24, 24, 36, 0.86); //rgba( 0,0,0, 0.2 );
         position: absolute;
         z-index: 99999;
         top: @title-bar-height;
@@ -16,7 +16,7 @@
             margin: auto;
             margin-top: 5em;
             max-width: 30em;
-            background-color: white;
+            background-color: @bg-light-color;
             color: black;
             padding: 1em;
             box-shadow: 0 0 40px 10px #000;
@@ -45,6 +45,18 @@
                     &.note {
                         width: 20em;
                     }
+                }
+
+            }
+        }
+
+        &.lodestone {
+            .content {
+                text-align: center;
+
+                img {
+                    display: block;
+                    margin: 2em auto;
                 }
 
             }

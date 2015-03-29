@@ -6,7 +6,7 @@ class module.exports.MenuView extends Marionette.LayoutView
 	template: _.template """
 		<div class="content">
 			<ul>
-				<li class="active" data-item="collection"><i class="icon-magnet"></i>Magnet Collection</li>
+				<li data-item="collection"><i class="icon-magnet"></i>Magnet Collection</li>
 				<li data-item="cards"><i class="icon-tags"></i>Card Deck</li>
 				<li data-item="search" class="search">
 					<form action="">
@@ -26,6 +26,14 @@ class module.exports.MenuView extends Marionette.LayoutView
 		'click li': 'handleClickItem'
 		'click .search input': 'noop'
 		'submit .search form': 'noop'
+
+	initialize: ({@defaultItem}) ->
+
+	onShow: ->
+		console.log 'show menuView ', @defaultItem
+		el = @$( "li[data-item=\"#{ @defaultItem }\"]" )
+		console.log  'default Item', el, @defaultItem
+		el.addClass( 'active' )
 
 	noop: (ev) ->
 		el = ev.currentTarget

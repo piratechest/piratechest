@@ -7,6 +7,8 @@ class module.exports.CardsView extends Marionette.LayoutView
 		<div class="content">
 			<img src="images/cards.png" alt="">
 			<p>The chest contains a mysterious set of blank <strong>Playing Cards</strong>. For the curious, you can find out more information at: <a href="http://github.com/piratechest/piratechest-cards">http://github.com/piratechest/piratechest-cards</a>.</p>
+
+			<button>Draw a Card</button>
 		</div>
 	"""
 	events:

@@ -26,8 +26,6 @@ class module.exports.BodyView extends Marionette.LayoutView
         'click .add-new button': 'handleAddMagnet' 
     
     initialize: ({@collection}) ->
-        @collectionView = new MagnetCollectionView( collection: @collection )
-        @listenTo @collectionView, 'show:details', @handleShowDetails
 
     handleAddMagnet: (ev) ->
         ev.preventDefault()
@@ -38,6 +36,8 @@ class module.exports.BodyView extends Marionette.LayoutView
         @ui.input.val( '' )
 
     onShow: ->
+        @collectionView = new MagnetCollectionView( collection: @collection )
+        @listenTo @collectionView, 'show:details', @handleShowDetails
         @magnets.show( @collectionView )
 
     handleShowDetails: (magnet) ->

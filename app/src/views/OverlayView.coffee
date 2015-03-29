@@ -19,4 +19,4 @@ class module.exports.OverlayView extends Marionette.ItemView
         false
 
     handleClickOverlay: ->
-        @trigger( 'close' )
+        @destroy()
