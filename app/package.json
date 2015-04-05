@@ -12,6 +12,7 @@
   "main": "app://piratechest/index.html",
   "single-instance": false,
   "dom_storage_quota": 1024,
+  "user-agent": "PirateChest v0.0.1 (POC)",
   "window": {
     "show": false,
     "title": "piratechest",
@@ -21,12 +22,13 @@
     "position": "center",
     "width": 835,
     "height": 600,
-    "min_width": 835,
+    "min_width": 300,
     "min_height": 200,
     "resizable": true,
     "always-on-top": false,
     "fullscreen": false
   },
+  "chromium-args": "--dns-server='8.8.8.8' --incognito --wait-for-debugger --activate-on-launch",
   "dependencies": {
     "backbone": "^1.1.2",
     "backbone.marionette": "^2.4.1",
@@ -36,6 +38,7 @@
     "jquery": "^2.1.3",
     "underscore": "^1.8.2",
     "webtorrent": "^0.30.0",
-    "magnet-uri": "~4.2.2"
+    "magnet-uri": "~4.2.2",
+    "nedb": "~1.1.1"
   }
 }

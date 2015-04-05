@@ -5,48 +5,53 @@
 
     overflow: hidden;
 
+    
+
     ul {
-        min-width: 841px;
+        min-width: @small-screen-break-point;
         margin: 0;
         padding: 0;
         list-style: none;
         overflow: auto;
+
+        @media (max-width:@small-screen-break-point) { min-width: 0; }
     }
 
     li {
         float: left;
         padding: 1em 2em;
-        min-width: 12em;
         line-height: 2em;
         border-right: 1px solid @border-color;
         vertical-align: middle;
         cursor: pointer;
 
-        i {
-            margin-right: 1em;
+        form {
+            display: inline-block;
         }
 
-        &.active {
-            color: @text-selected-color;
-            background-color: @body-bg-color;
+        > *:not(i) {
+            min-width: 10em;
+            margin-left: 1em;
         }
 
         &:hover {
             color: @text-selected-color;
         }
 
-        &.search {
-
-            form {
-                display: inline-block;
-            }
-
-            
-        }
-
-        &.settings {
+        @media (max-width:@small-screen-break-point) {
             min-width: 0;
-            padding-right: 1em;
+
+            *:not(i) {
+                display: none;
+            }
+        }
+    }
+    
+    li {
+
+        &.active {
+            color: @text-selected-color;
+            background-color: @body-bg-color;
         }
     }
 }

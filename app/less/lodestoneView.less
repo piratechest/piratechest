@@ -4,10 +4,38 @@
 .lodestone-view {
 	padding: 1em;
 
-	.about {
+	.search {
+		text-align: left;
+		margin-bottom: 3em;
+
+		i {
+			line-height: 1.5em;
+			margin-right: 1em;
+		}
+
+		input {
+			min-width: 20em;
+		}
+	}
+
+	.lodestone-search-view {
+		.tag {
+			margin-right: 0.4em;
+			padding: 0.4em;
+			background-color: rgba( 0,0,0,0.5 );
+			color: @text-selected-color;
+			border-radius: 3px;
+		}
+
+		i {
+			cursor: pointer;
+		}
+	}
+
+	.lodestone-empty-view {
 		text-align: center;
 		max-width: 30em;
-		margin: 0 auto;
+		margin: 5em auto 0;
 	}
 
 }

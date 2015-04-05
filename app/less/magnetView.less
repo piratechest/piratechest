@@ -1,7 +1,13 @@
 .magnet-view {
 	padding: 0.5em;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-	cursor: pointer;
+	
+	.magnet-view-inner {
+		cursor: pointer;
+		max-width: 33em;
+		overflow: hidden;
+		display: block;
+	}
 
 	&:hover {
 		color: @text-selected-color;
@@ -13,7 +19,6 @@
 
 	span {
 		margin-right: 0.5em;
-		width: 25em;
 		display: inline-block;
 	}
 
@@ -38,5 +43,14 @@
 	.status {
 		color: red;
 		&.ok { color: green; }
+	}
+
+
+	.details, .title {
+		float: left;
+	}
+
+	.status, .favorite, .magnet-link {
+		float: right;
 	}
 }

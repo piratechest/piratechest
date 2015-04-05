@@ -3,27 +3,34 @@
 
 .body-view {
 
-	.add-new {
-		padding: 0.5em;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-		input {
-			width: 12em;
-			background-color: rgba(255, 255, 255, 0.1);
-			border: 0 none;
-			padding: 0.5em;
-			color: @text-color;
-		}
-
-		button {
-			padding: 0.5em;
-			background-color: transparent;
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			color:rgba(255, 255, 255, 0.1);
+	ul.actions {
+		overflow: auto;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid @border-color;
+		
+		> li {	
+			padding: 1em;
+			float: left;
+			width: auto;
+			list-style: none;
 			cursor: pointer;
-			display: inline;
-			margin: 0;
-			font-size: 1em;
+			position: relative;
+			
+			&:hover {
+				color: @text-selected-color;
+			}
+
+			.input-overlay {
+				cursor: pointer;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				opacity: 0;
+			}
 		}
 	}
 }

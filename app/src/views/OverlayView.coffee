@@ -1,6 +1,6 @@
 {_, $, Backbone, Marionette } = require( '../common.coffee' )
 
-class module.exports.OverlayView extends Marionette.ItemView
+class module.exports.OverlayView extends Marionette.LayoutView
     className: 'overlay-view'
     template: _.template """
         <div class="overlay">

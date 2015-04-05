@@ -1,0 +1,3 @@
+[submodule "app/src/lib/lodestone"]
+	path = app/src/lib/lodestone
+	url = https://d11e9@github.com/piratechest/lodestone.git

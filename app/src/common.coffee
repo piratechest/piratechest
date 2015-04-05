@@ -1,7 +1,8 @@
 
 global.document = window.document
-{ nw, win } = window.nwin
 localStorage = window.localStorage
+
+{ nw, win } = window.nwin
 
 _ = require 'underscore'
 $ = require 'jquery'

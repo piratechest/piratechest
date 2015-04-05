@@ -2,40 +2,67 @@
 @import 'layoutValues';
 
 .details-region {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	background-color: @bg-light-color;
-	color: @text-dark-color;
+    
 
-	.details-view {
-		box-sizing: border-box;
-		height: 100%;
-		width: 0;
-		transition: width 1s ease-in-out;
-		width: 30em;
-		padding: 1em 1em 1em 2em;
-		box-shadow: inset 5px 0px 10px rgba( 0,0,0, 0.25);
-		overflow-y: auto;
-		overflow-x: hidden;
+    .details-view {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
 
-		white-space: -webkit-pre-wrap;
-		color: @text-dark-color;
-		word-wrap: break-word;
-		word-break: break-all;
-		white-space: normal;
+        .overlay {
+            height: 100%;
+        }
 
-		.close {
-			padding: 0.4em;
-			float: right;
-			cursor: pointer;
-		}
+        .content {
+            color: @text-dark-color;
+            background-color: @bg-light-color;
+            box-sizing: border-box;
+            width: 0;
+            height: 100%;
+            transition: width 1s ease-in-out;
+            width: 30em;
+            padding: 1em 1em 1em 2em;
+            box-shadow: inset 5px 0px 10px rgba( 0,0,0, 0.25);
+            
+            
 
-		ul {
-			margin: 0;
-			padding: 0;
-			list-style: none;
-		}
-	}
+            .close {
+                padding: 0.4em;
+                float: right;
+                cursor: pointer;
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+        }
+    }
+
+    @media (max-width:@small-screen-break-point) {
+        .details-view {
+            background-color: @bg-overlay-color; //rgba( 0,0,0, 0.2 );
+            position: absolute;
+            z-index: 99999;
+            top: @title-bar-height;
+            bottom: @app-border-width;
+            left: @app-border-width;
+            right: @app-border-width;
+            left: 0;
+
+            .overlay {
+                height: auto;
+                
+                .content {
+                    width: auto;
+                    max-width: 30em;
+                    margin: 2em auto;
+                    padding: 1em;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
 }

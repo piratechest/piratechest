@@ -4,7 +4,7 @@
 .overlay-view {
     
     .overlay {
-        background-color: rgba(24, 24, 36, 0.86); //rgba( 0,0,0, 0.2 );
+        background-color: @bg-overlay-color; //rgba( 0,0,0, 0.2 );
         position: absolute;
         z-index: 99999;
         top: @title-bar-height;
@@ -59,6 +59,13 @@
                     margin: 2em auto;
                 }
 
+            }
+        }
+
+        &.raid {
+            .loot-amount img {
+                height: 1em;
+                margin-right: 0.5em;
             }
         }
     }
