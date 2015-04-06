@@ -4,7 +4,7 @@ parseTorrent = require( 'parse-torrent' )
 
 { Magnet } = require './Magnet.coffee'
 Logger = require './Logger.coffee'
-log = new Logger( verbose: true )
+log = new Logger( verbose: false )
 
 class module.exports.MagnetCollection extends Backbone.Collection
 

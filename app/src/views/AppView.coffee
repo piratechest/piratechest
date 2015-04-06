@@ -28,7 +28,7 @@ class module.exports.AppView extends Marionette.LayoutView
         body: '.body-region'
         overlay: '.overlay'
 
-    initialize: ({collection, config, torrentClient}) ->
+    initialize: ({collection, config, torrentClient, lodestone}) ->
         @collection = collection
         @config = config
         @torrentClient = torrentClient
@@ -38,9 +38,9 @@ class module.exports.AppView extends Marionette.LayoutView
         
         @views = {}
         @views['collection'] = new BodyView( {collection } )
-        @views['search'] = new LodestoneView( {config, collection, torrentClient} )
+        @views['search'] = new LodestoneView( {config, collection, torrentClient, lodestone} )
         @views['cards'] = new CardsView()
-        @views['settings'] = new SettingsView( {config} )
+        @views['settings'] = new SettingsView( {config, torrentClient, lodestone} )
         @views['raids'] = new RaidsView()
 
     onShow: ->

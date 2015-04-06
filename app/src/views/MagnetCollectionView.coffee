@@ -3,7 +3,7 @@
 { nw, win } = window.nwin
 
 Logger = require '../models/Logger.coffee'
-log = new Logger( verbose: true )
+log = new Logger( verbose: false )
 
 
 class MagnetView extends Marionette.ItemView

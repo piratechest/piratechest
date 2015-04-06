@@ -2,16 +2,12 @@
 @import 'layoutValues';
 
 .cards-view {
-	padding: 5em;
-	text-align: center;
+	padding: 1em;
 
-	.content {
-		max-width: 40em;
-		margin: 0 auto;
-	}
-
-	img {
-		margin-bottom: 1em;
+	.draw-card {
+		font-weight: bold;
+		color: @text-link-color;
+		cursor: pointer;
 	}
 }
 
@@ -33,16 +29,104 @@
 
 .card-collection-view {
 	overflow: auto;
+	padding: 1em 0;
+}
+
+.empty-cards-view {
+	padding: 5em;
+	text-align: center;
+	max-width: 40em;
+	margin: 0 auto;
+
+
+	img {
+		margin-bottom: 1em;
+	}
 }
 
 .card-view {
 	float: left;
 	width: 13em;
 	margin-right: 0.5em;
-	background-color: #ccc;
+	margin-bottom: 0.5em;
 	border-radius: 5px;
 	padding: 1em;
 	height: 18em;
 	overflow: hidden;
 	text-overflow: elispses;
+	color: black;
+	box-sizing: border-box;
+
+	&.text-card {
+		background-color: #CDCCA0;
+	}
+
+	&.data-card {
+		background-color: rgba( 255,255,255,0.5 );
+	}
+
+	&.graphic-card {
+		padding: 0;
+
+		.content {
+			background-color: white;
+			border: .5em solid black;
+			box-shadow: 0px 0px .2em rgba(255,255,255,0.2);
+			font-size: 8px;
+			text-align: left;
+			padding: 0.5em;
+			max-height: 90em;
+
+			.rating {
+				float: right;
+				padding: 0.4em;
+			}
+			.title {
+				padding: 0.4em;}
+
+			.main-image {
+				width: 100%;
+				border: 0.1em solid #ccc;
+				height: 0;
+				background-size: cover;
+				padding-bottom: 60%;
+			}
+
+			.set { 
+				float: right;
+				padding: 0.4em;
+			}
+			.type {
+				float: left;
+				padding: 0.4em;
+				margin-right: 0.5em;
+
+				&:after {
+					margin-left: 0.5em;
+					content: "\2014";
+				}
+			}
+
+			.tags {
+				padding: 0.4em;
+			}
+
+			.tag {
+
+				& ~ .tag {
+					&:before {
+						content: ",";
+					}
+				}
+			}
+
+			.description {
+				padding: 0.4em;
+				min-height: 8em;
+				background-color: rgba( 0,0,0, 0.5 );
+				clear: left;
+			}
+		}
+
+	}
 }

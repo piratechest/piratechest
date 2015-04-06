@@ -1,6 +1,6 @@
 {_, $, Backbone, Marionette, localStorage } = require( '../common.coffee' )
 
-Lodestone = require( '../lib/lodestone')
+
 
 { MagnetCollectionView  } = require './MagnetCollectionView.coffee'
 { Magnet } = require '../models/Magnet.coffee'
@@ -32,9 +32,9 @@ class module.exports.LodestoneView extends Marionette.LayoutView
         searchesRegion: '.searches'
         output: '.output'
 
-    initialize: ({@torrentClient, @config, collection}) ->
+    initialize: ({@torrentClient, @config, collection, @lodestone}) ->
         log.info "LodestoneView init.", @torrentClient
-        @lodestone = window.lodestone = new Lodestone( {data: {}, seeds: @config?.customSeeds } ) if @config?.flags?.connectLodestoneOnStartup
+        @lodestone.start() # if @config?.flags?.connectLodestoneOnStartup
         @listenTo collection, 'change', ->
             return unless @lodestone
             data = @_collectionToData( collection )
@@ -42,7 +42,7 @@ class module.exports.LodestoneView extends Marionette.LayoutView
 
     onShow: ->
         log.info "LodestoneView show."
-        @lodestone ?= window.lodestone = new Lodestone( {data: {}, seeds: @config?.customSeeds } )  
+        # @lodestone.start() unless @lodestone.started
         @listenTo @lodestone, 'peer', @_handleAddPeer
         @listenTo @lodestone, 'data', @_handleData
 
@@ -70,9 +70,6 @@ class module.exports.LodestoneView extends Marionette.LayoutView
         for infoHash in data.hashes
             magnet = new Magnet( infoHash: infoHash )
             @searchResults.add( magnet )
-
-    _handleAddPeer: =>
-        log.info 'new peer', arguments
 
 
 class LodestoneEmptyView extends Marionette.ItemView

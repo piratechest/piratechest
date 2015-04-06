@@ -2,6 +2,8 @@ fs = require 'fs'
 path = require 'path'
 WebTorrent = require 'webtorrent'
 
+Lodestone = require( './lib/lodestone')
+
 {_, $, Backbone, Marionette, nw, win, localStorage } = require './common.coffee'
 Logger = require './models/Logger.coffee'
 log = new Logger( verbose: true )
@@ -53,10 +55,15 @@ window.app.magnetCollection = magnetCollection =  new MagnetCollection [],
     torrentClient: client
     store: new Store('magnets')
 
+lodestone = window.lodestone = new Lodestone
+    data: {}
+    seeds: CONFIG?.customSeeds
+
 if CONFIG?.flags?.loadFromDatastore
     magnetCollection.fetch()
 
-
+if CONFIG?.flags?.connectLodestoneOnStartup
+    lodestone.start()
 
 if CONFIG?.flags?.getPeersFromSeed
     # Use The Map, to find bootstrap/seed peers.
@@ -71,7 +78,12 @@ $ ->
     appRegion = new Marionette.Region( el: $('body').get(0) )
     appRegion.show( new LoadingView() )
     # TODO: Actually load stuff not just setTimeout
-    appView = new AppView( config: CONFIG, collection: magnetCollection, torrentClient: client )
+    appView = new AppView
+        config: CONFIG
+        collection: magnetCollection
+        torrentClient: client
+        lodestone: lodestone
+
     setTimeout ( ->
         appRegion.show( appView )
         introView = new IntroView()
