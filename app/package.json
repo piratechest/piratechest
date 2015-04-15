@@ -3,7 +3,7 @@
   "name": "piratechest",
   "description": "Peer to Peer magnet discovery.",
   "version": "0.0.1",
-  "homepage": "",
+  "homepage": "piratechest.github.io",
   "private": true,
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   "main": "app://piratechest/index.html",
   "single-instance": false,
   "dom_storage_quota": 1024,
-  "user-agent": "PirateChest v0.0.1 (POC)",
+  "user-agent": "PirateChest v0.0.2 (POC)",
   "window": {
     "show": false,
     "title": "piratechest",
@@ -20,15 +20,15 @@
     "toolbar": false,
     "frame": false,
     "position": "center",
-    "width": 835,
-    "height": 600,
+    "width": 500,
+    "height": 500,
     "min_width": 300,
     "min_height": 200,
     "resizable": true,
     "always-on-top": false,
     "fullscreen": false
   },
-  "chromium-args": "--dns-server='8.8.8.8' --incognito --wait-for-debugger --activate-on-launch",
+  "chromium-args": "--dns-server='8.8.8.8' --incognito",
   "dependencies": {
     "backbone": "^1.1.2",
     "backbone.marionette": "^2.4.1",

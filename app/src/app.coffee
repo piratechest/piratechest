@@ -8,6 +8,8 @@ Lodestone = require( './lib/lodestone')
 Logger = require './models/Logger.coffee'
 log = new Logger( verbose: true )
 
+nw.App.setCrashDumpDir("logs")
+
 CONFIG = require( './models/Config.coffee')
 Store = require './models/PersistantModel.coffee'
 
@@ -22,6 +24,21 @@ Store = require './models/PersistantModel.coffee'
 
 window.app = app = {}
 
+# class App extends Backbone.Model
+#     initialize: ({@config, @gossip}) ->
+#         @set( 'seeds', @config.customSeeds or [] )
+#         @set( 'peers', [] )
+#         @listenTo( @gossip, 'peer', @_handleAddNewPeer )
+
+#     @_handleAddNewPeer: (peer) ->
+#         @peers.push
+#             id: peer.id
+#             host: peer.transport.host
+#             port: peer.transport.port
+#             live: peer.live
+
+
+# window.app = new App()
 
 nativeMenuBar = new nw.Menu( type: "menubar" )
 nativeMenuBar.createMacBuiltin("Pirate Chest") if process.platform is 'darwin'
@@ -55,7 +72,16 @@ window.app.magnetCollection = magnetCollection =  new MagnetCollection [],
     torrentClient: client
     store: new Store('magnets')
 
+
+
+rand = (min,max) -> Math.floor(Math.random() * (max - min + 1)) + min
 lodestone = window.lodestone = new Lodestone
+    options:
+        DEAD_PEER_PHI: 1
+        id: client.peerIdHex
+        transport:
+            port: (client.torrentPort or rand( 9002, 10000) ) - 1337
+            host: 'localhost'
     data: {}
     seeds: CONFIG?.customSeeds
 
@@ -72,6 +98,7 @@ if CONFIG?.flags?.getPeersFromSeed
         app.seedMap = torrent
         magnet = Magnet.fromTorrent( torrent )
         app.seeds = torrent.swarm._peers
+
         torrent.swarm.resume()
 
 $ ->
@@ -108,4 +135,6 @@ $ ->
         
     ), 3000
 
-
+process.on 'uncaughtException', (err) ->
+    window.alert('uncaughtException')
+    window.console.error(err, err.stack)

@@ -6,7 +6,7 @@
 { Magnet } = require '../models/Magnet.coffee'
 { MagnetCollection } = require '../models/MagnetCollection.coffee'
 Logger = require '../models/Logger.coffee'
-log = new Logger( verbose: true )
+log = new Logger( verbose: false )
 
 class module.exports.LodestoneView extends Marionette.LayoutView
     className: 'lodestone-view'
@@ -34,16 +34,15 @@ class module.exports.LodestoneView extends Marionette.LayoutView
 
     initialize: ({@torrentClient, @config, collection, @lodestone}) ->
         log.info "LodestoneView init.", @torrentClient
-        @lodestone.start() # if @config?.flags?.connectLodestoneOnStartup
+        #@lodestone.start() #if @config?.flags?.connectLodestoneOnStartup
         @listenTo collection, 'change', ->
             return unless @lodestone
             data = @_collectionToData( collection )
-            @lodestone.updateData( data )
 
     onShow: ->
         log.info "LodestoneView show."
-        # @lodestone.start() unless @lodestone.started
-        @listenTo @lodestone, 'peer', @_handleAddPeer
+        @lodestone.updateData( @_collectionToData( @collection ) )
+        @lodestone.start() unless @lodestone.started
         @listenTo @lodestone, 'data', @_handleData
 
         @searchResults = new MagnetCollection([], { @torrentClient } )

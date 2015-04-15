@@ -1,6 +1,6 @@
 
 { _, $, Backbone, Marionette } = require( '../common.coffee' )
-{ nw, win } = window.nwin
+{ nw } = window.nwin
 Logger = require '../models/Logger.coffee'
 log = new Logger()
 
@@ -31,16 +31,19 @@ class module.exports.TitlebarView extends Marionette.ItemView
 
     handleMinify: ->
         log.info 'Minify App'
-        win.minimize()
+        @_getWin().minimize()
 
     handleFullscreen: ->
         log.info 'Fullscreen App'
-        win.toggleFullscreen()
+        @_getWin().toggleFullscreen()
 
     handleClose: ->
         log.info 'Close App'
-        win.close()
+        @_getWin().close()
 
     handleDebug: ->
         log.info 'Debug App'
-        win.showDevTools()
+        @_getWin().showDevTools()
+
+    _getWin: ->
+        nw.Window.get()

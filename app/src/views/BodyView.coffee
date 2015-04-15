@@ -65,7 +65,7 @@ class module.exports.BodyView extends Marionette.LayoutView
                         return if err
                         log.info "Read torrent successfully: ", torrent
                         magnet = Magnet.fromTorrent( torrent )
-                        collection.add( magnet )
+                        collection.create( magnet )
 
     _handleAddMagnet: (ev) ->
         ev.preventDefault()

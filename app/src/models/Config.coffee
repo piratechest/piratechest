@@ -5,15 +5,15 @@ _ = require 'underscore'
 
 defaultConfig =
     __DELETE_THIS_FILE_TO_RESET_CONFIG_TO_DEFAULT: 'handy'
-    defaultView: "settings"
+    defaultView: "collection"
     flags:
         clearLocalStorageOnStartup: false
-        clearDatastoreOnStartup: true
-        showInspectorOnStartup: false
+        clearDatastoreOnStartup: false
+        showInspectorOnStartup: false # crashes with multiple instances
         loadFromDatastore: true
         getPeersFromSeed: true
         connectLodestoneOnStartup: true
-        runTracker: false
+        runTracker: true
     customSeeds: [
         { id: 'example', transport: { host: 'localhost', port: 9001 } }
     ]
