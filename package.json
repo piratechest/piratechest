@@ -11,8 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "app": "nodewebkit ./app",
     "build": "grunt",
-    "pull": "git pull origin master && git submodule foreach git pull origin master",
-    "server": "node ./app/src/lib/lodestone/index.js 9001"
+    "pull": "git pull origin master && git submodule foreach git pull origin master"
   },
   "author": "d11e9",
   "license": "NONE YET",

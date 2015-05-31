@@ -1,8 +1,7 @@
 fs = require 'fs'
 path = require 'path'
 WebTorrent = require 'webtorrent'
-
-Lodestone = require( './lib/lodestone')
+web3 = require 'web3'
 
 {_, $, Backbone, Marionette, nw, win, localStorage } = require './common.coffee'
 Logger = require './models/Logger.coffee'
@@ -24,21 +23,6 @@ Store = require './models/PersistantModel.coffee'
 
 window.app = app = {}
 
-# class App extends Backbone.Model
-#     initialize: ({@config, @gossip}) ->
-#         @set( 'seeds', @config.customSeeds or [] )
-#         @set( 'peers', [] )
-#         @listenTo( @gossip, 'peer', @_handleAddNewPeer )
-
-#     @_handleAddNewPeer: (peer) ->
-#         @peers.push
-#             id: peer.id
-#             host: peer.transport.host
-#             port: peer.transport.port
-#             live: peer.live
-
-
-# window.app = new App()
 
 nativeMenuBar = new nw.Menu( type: "menubar" )
 nativeMenuBar.createMacBuiltin("Pirate Chest") if process.platform is 'darwin'
@@ -73,23 +57,13 @@ window.app.magnetCollection = magnetCollection =  new MagnetCollection [],
     store: new Store('magnets')
 
 
-
-rand = (min,max) -> Math.floor(Math.random() * (max - min + 1)) + min
-lodestone = window.lodestone = new Lodestone
-    options:
-        DEAD_PEER_PHI: 1
-        id: client.peerIdHex
-        transport:
-            port: (client.torrentPort or rand( 9002, 10000) ) - 1337
-            host: 'localhost'
-    data: {}
-    seeds: CONFIG?.customSeeds
-
 if CONFIG?.flags?.loadFromDatastore
     magnetCollection.fetch()
 
 if CONFIG?.flags?.connectLodestoneOnStartup
-    lodestone.start()
+    window.web3 = web3
+    httpProvider = new web3.providers.HttpProvider( "http://localhost:8545" )
+    window.web3.setProvider( httpProvider )
 
 if CONFIG?.flags?.getPeersFromSeed
     # Use The Map, to find bootstrap/seed peers.
@@ -109,7 +83,7 @@ $ ->
         config: CONFIG
         collection: magnetCollection
         torrentClient: client
-        lodestone: lodestone
+        #lodestone: lodestone
 
     setTimeout ( ->
         appRegion.show( appView )
@@ -120,20 +94,6 @@ $ ->
             
     ), 1000
     win.show()
-
-    # test magnet TODO: Remove this.
-    setTimeout ( ->
-
-        magnetCollection.create
-            infoHash: '546cf15f724d19c4319cc17b179d7e035f89c1f4'
-            favorite: false
-
-        # magnetCollection.create
-        #     infoHash: '81d8ef3729a7265d30155c5e7b047312fe473e44'
-        #     favorite: false
-
-        
-    ), 3000
 
 process.on 'uncaughtException', (err) ->
     window.alert('uncaughtException')

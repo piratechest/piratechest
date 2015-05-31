@@ -32,18 +32,11 @@ class module.exports.LodestoneView extends Marionette.LayoutView
         searchesRegion: '.searches'
         output: '.output'
 
-    initialize: ({@torrentClient, @config, collection, @lodestone}) ->
+    initialize: ({@torrentClient, @config, collection}) ->
         log.info "LodestoneView init.", @torrentClient
-        #@lodestone.start() #if @config?.flags?.connectLodestoneOnStartup
-        @listenTo collection, 'change', ->
-            return unless @lodestone
-            data = @_collectionToData( collection )
 
     onShow: ->
         log.info "LodestoneView show."
-        @lodestone.updateData( @_collectionToData( @collection ) )
-        @lodestone.start() unless @lodestone.started
-        @listenTo @lodestone, 'data', @_handleData
 
         @searchResults = new MagnetCollection([], { @torrentClient } )
         @resultsView = new MagnetCollectionView( collection: @searchResults )
@@ -62,7 +55,6 @@ class module.exports.LodestoneView extends Marionette.LayoutView
         input = @ui.input.val()
         search = new Backbone.Model( input: input )
         @searches.add( search )
-        @lodestone.addSearch( input )
         false
 
     _handleData: (data) =>

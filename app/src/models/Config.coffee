@@ -14,6 +14,7 @@ defaultConfig =
         getPeersFromSeed: true
         connectLodestoneOnStartup: true
         runTracker: true
+        
     customSeeds: [
         { id: 'example', transport: { host: 'localhost', port: 9001 } }
     ]

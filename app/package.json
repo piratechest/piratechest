@@ -39,6 +39,7 @@
     "underscore": "^1.8.2",
     "webtorrent": "^0.30.0",
     "magnet-uri": "~4.2.2",
-    "nedb": "~1.1.1"
+    "nedb": "~1.1.1",
+    "web3": "~0.5.0"
   }
 }
