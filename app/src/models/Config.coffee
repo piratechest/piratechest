@@ -15,9 +15,9 @@ defaultConfig =
         connectLodestoneOnStartup: true
         runTracker: true
         
-    customSeeds: [
-        { id: 'example', transport: { host: 'localhost', port: 9001 } }
-    ]
+    ethereumRPCNode:
+        port: 8545
+        host: 'localhost'
 
 localPath = path.join( __dirname, '../../config.json' )
 hasLocalConfig = fs.existsSync( localPath )

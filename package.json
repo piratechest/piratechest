@@ -1,6 +1,6 @@
 {
   "name": "PirateChest",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Peer to peer magnet discovery",
   "repository": {
     "type": "git",
@@ -9,8 +9,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "app": "nodewebkit ./app",
+    "app": "nw ./app",
     "build": "grunt",
+    "build-new": "bash ./nwjs-build.sh --src=./app --output-dir=./dist --name=app --win-icon=app/images/logo.ico --osx-icon=app/images/logo.icns --target=\"0 1 2 3 4 5\" --version=\"0.0.3\" --libudev --nw=0.12.2 --build",
     "pull": "git pull origin master && git submodule foreach git pull origin master"
   },
   "author": "d11e9",
@@ -18,6 +19,6 @@
   "dependencies": {
     "grunt": "^0.4.5",
     "grunt-node-webkit-builder": "^1.0.2",
-    "nodewebkit": "^0.12.0"
+    "nw": "~0.12.2"
   }
 }

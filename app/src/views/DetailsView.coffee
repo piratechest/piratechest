@@ -55,10 +55,20 @@ class module.exports.DetailsView extends Marionette.ItemView
 
     onShow: ->
         console.log( "Showing details for: ", @model)
-        @model.torrent?.discovery.tracker.scrape()
-        @model.torrent?.discovery.tracker.on 'scrape', (data) =>
+        window.Mousetrap.bind('del', @_deleteMagnet )
+        @_updateDetails()
+
+    _updateDetails: ->
+        console.log @model
+        @model.torrent?.discovery?.tracker?.scrape?()
+        @model.torrent?.discovery?.tracker?.on 'scrape', (data) =>
             console.log "Got Scrape event for torrent: #{ @model.torrent.infoHash }"
             @model.set('peers', data.complete )
 
+    _deleteMagnet: =>
+        @model.destroy()
+        @handleClose()
+
     handleClose: ->
+        window.Mousetrap.reset()
         @trigger( 'close' )

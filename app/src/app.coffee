@@ -14,6 +14,7 @@ Store = require './models/PersistantModel.coffee'
 
 { Magnet } = require './models/Magnet.coffee'
 { MagnetCollection } = require './models/MagnetCollection.coffee'
+{ Lodestone } = require './models/Lodestone.coffee'
 
 { AppView } = require './views/AppView.coffee'
 { LoadingView } = require './views/LoadingView.coffee'
@@ -62,8 +63,10 @@ if CONFIG?.flags?.loadFromDatastore
 
 if CONFIG?.flags?.connectLodestoneOnStartup
     window.web3 = web3
-    httpProvider = new web3.providers.HttpProvider( "http://localhost:8545" )
-    window.web3.setProvider( httpProvider )
+    app.lodestone = new Lodestone
+        host: CONFIG.ethereumRPCNode.host
+        port: CONFIG.ethereumRPCNode.port
+        magnetCollection: magnetCollection
 
 if CONFIG?.flags?.getPeersFromSeed
     # Use The Map, to find bootstrap/seed peers.
@@ -83,7 +86,7 @@ $ ->
         config: CONFIG
         collection: magnetCollection
         torrentClient: client
-        #lodestone: lodestone
+        lodestone: app.lodestone
 
     setTimeout ( ->
         appRegion.show( appView )

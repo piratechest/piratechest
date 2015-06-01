@@ -38,7 +38,7 @@ class module.exports.AppView extends Marionette.LayoutView
         
         @views = {}
         @views['collection'] = new BodyView( {collection } )
-        @views['search'] = new LodestoneView( {config, collection, torrentClient} )
+        @views['search'] = new LodestoneView( {config, collection, torrentClient, lodestone} )
         @views['cards'] = new CardsView()
         @views['settings'] = new SettingsView( {config, torrentClient, lodestone} )
         @views['raids'] = new RaidsView( {collection} )
