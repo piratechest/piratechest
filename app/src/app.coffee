@@ -1,7 +1,8 @@
 fs = require 'fs'
 path = require 'path'
 WebTorrent = require 'webtorrent'
-web3 = require 'web3'
+Web3 = require 'web3'
+web3 = new Web3()
 
 {_, $, Backbone, Marionette, nw, win, localStorage } = require './common.coffee'
 Logger = require './models/Logger.coffee'
@@ -94,7 +95,7 @@ $ ->
         appView.showOverlay( introView ) unless localStorage.introShown
         introView.on 'open', ->
             appView.showOverlay( new ContentsView() )
-            
+
     ), 1000
     win.show()
 
