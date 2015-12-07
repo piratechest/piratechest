@@ -1,6 +1,7 @@
 {_, $, Backbone, Marionette, nw } = require( '../common.coffee' )
 
-web3 = require 'web3'
+Web3 = require 'web3'
+web3 = new Web3('http://localhost:8545')
 
 LODESTONE_REQUEST_TOPIC = "lodestone_search"
 
@@ -33,14 +34,15 @@ class LodestoneSearch extends Backbone.Model
 class module.exports.Lodestone
     constructor: ({@host, @port, @magnetCollection})->
         endpoint = "http://#{ @host }:#{ @port }"
+        # somewhere here provide better error handling of failed ethnode connection
         console.log "Lodestone Ethererum RPC Node endpoint: ", endpoint
-        httpProvider = new web3.providers.HttpProvider( endpoint )
-        web3.setProvider( httpProvider )
+        httpProvider = new web3.providers.HttpProvider( endpoint ) if web3? and web3.providers?
+        web3.setProvider( httpProvider ) if web3?
         @searches = []
         @_listenForSearches()
 
     _listenForSearches: ->
-        @filter = web3.shh.filter( topics: [ LODESTONE_REQUEST_TOPIC ] )
+        @filter = web3.shh.filter( topics: [ LODESTONE_REQUEST_TOPIC ] ) if web3? and web3.shh?
         @filter.watch (err, resp) =>
             search = resp.payload[0]
             console.log( "Incomming search: ", search ) unless err
@@ -61,5 +63,3 @@ class module.exports.Lodestone
 
     stopSearches: ->
         search.filter.stopListening() for search in @searches
-
-

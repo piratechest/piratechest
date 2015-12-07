@@ -19,6 +19,7 @@
   "dependencies": {
     "grunt": "^0.4.5",
     "grunt-node-webkit-builder": "^1.0.2",
-    "nw": "~0.12.2"
+    "nw": "~0.12.2",
+    "file": "0.2.2"
   }
 }
